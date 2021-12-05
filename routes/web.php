@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+Route::name('users.')->prefix('users')->group(function () {
+    Route::post('/register', [UsersController::class, 'register'])->name('register');
+    Route::post('/login', [UsersController::class, 'login'])->name('login');
+    Route::get('/{user}', [UsersController::class, 'view'])->name('view');
+    Route::delete('/{user}', [UsersController::class, 'delete'])->name('delete');
 });
+
+Route::resource('tasks', TasksController::class);
