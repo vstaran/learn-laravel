@@ -14,7 +14,7 @@ class CreateTaskCommentTable extends Migration
     public function up()
     {
         Schema::create('task_comment', function (Blueprint $table) {
-            $table->id('task_comment_id');
+            $table->id('task_comment_id')->index();
             $table->bigInteger('user_id')->unsigned();
             $table->text('comment')->default(null);
             $table->bigInteger('task_id')->unsigned();

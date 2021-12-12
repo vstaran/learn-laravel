@@ -15,7 +15,8 @@ class AddColumnsInTask extends Migration
     {
         Schema::table('task', function (Blueprint $table) {
             $table->string('name', 500)->change();
-            $table->timestamp('date_due')->nullable();
+            $table->timestamp('date_due')->index()->nullable();
+            // $table->index('date_due');
         });
     }
 

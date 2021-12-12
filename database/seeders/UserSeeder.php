@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
          */
         $faker = Faker::create();
 
+        // use foreach for create user
         foreach (range(1, 10) as $item) {
             DB::table('users')->insert([
                'name' => $faker->name(),

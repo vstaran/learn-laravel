@@ -14,8 +14,8 @@ class CreateTaskGroupTable extends Migration
     public function up()
     {
         Schema::create('task_group', function (Blueprint $table) {
-            $table->id('task_group_id');
-            $table->string('name', 255);
+            $table->id('task_group_id')->index();
+            $table->string('name', 255)->index();
             $table->string('color', 7); // #00FF00
             $table->timestamps();
         });

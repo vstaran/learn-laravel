@@ -14,7 +14,7 @@ class CreateTaskLabelTable extends Migration
     public function up()
     {
         Schema::create('task_label', function (Blueprint $table) {
-            $table->id('task_label_id');
+            $table->id('task_label_id')->index();
             $table->string('name', 255);
             $table->text('description')->default(null);
             $table->string('color', 7); // #00FF00

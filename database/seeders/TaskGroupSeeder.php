@@ -16,47 +16,36 @@ class TaskGroupSeeder extends Seeder
     {
         DB::table('task_group')->insert(
             [
-                'name' => 'My',
-                'color' => '#00FF00',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-        DB::table('task_group')->insert(
-            [
-                'name' => 'Family',
-                'color' => '#FF1155',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-
-        DB::table('task_group')->insert(
-            [
-                'name' => 'Shopping',
-                'color' => '#FF00FF',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-        DB::table('task_group')->insert(
-            [
-                'name' => 'Work',
-                'color' => '#FFFF00',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-        DB::table('task_group')->insert(
-            [
-                'name' => 'Hobbies',
-                'color' => '#FF0080',
-                'created_at' => now(),
-                'updated_at' => now()
+                [
+                    'name' => 'My',
+                    'color' => '#00FF00',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'Family',
+                    'color' => '#FF1155',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'Shopping',
+                    'color' => '#FF00FF',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'Work',
+                    'color' => '#FFFF00',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'Hobbies',
+                    'color' => '#FF0080',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]
             ]
         );
     }

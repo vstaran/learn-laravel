@@ -16,25 +16,21 @@ class TaskStatusSeeder extends Seeder
     {
         DB::table('task_status')->insert(
             [
-                'name' => 'to do',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-        DB::table('task_status')->insert(
-            [
-                'name' => 'in progres',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        );
-
-        DB::table('task_status')->insert(
-            [
-                'name' => 'done',
-                'created_at' => now(),
-                'updated_at' => now()
+                [
+                    'name' => 'to do',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'in progres',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'name' => 'done',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]
             ]
         );
     }
