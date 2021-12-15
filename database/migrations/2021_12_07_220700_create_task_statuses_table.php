@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskCommentTable extends Migration
+class CreateTaskStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTaskCommentTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_comment', function (Blueprint $table) {
-            $table->id('task_comment_id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->text('comment')->default(null);
-            $table->bigInteger('task_id')->unsigned();
+        Schema::create('task_statuses', function (Blueprint $table) {
+            $table->id('task_status_id');
+            $table->string('name', 255);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTaskCommentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_comment');
+        Schema::dropIfExists('statuses');
     }
 }

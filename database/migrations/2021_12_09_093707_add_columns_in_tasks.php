@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsInTask extends Migration
+class AddColumnsInTasks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddColumnsInTask extends Migration
      */
     public function up()
     {
-        Schema::table('task', function (Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             $table->string('name', 500)->change();
             $table->timestamp('date_due')->index()->nullable();
             // $table->index('date_due');
@@ -27,7 +27,7 @@ class AddColumnsInTask extends Migration
      */
     public function down()
     {
-        Schema::table('task', function (Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             $table->string('name', 255)->change();
             $table->dropColumn('date_due');
         });

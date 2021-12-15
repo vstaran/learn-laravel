@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyInTaskComment extends Migration
+class AddForeignKeyInTaskComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class AddForeignKeyInTaskComment extends Migration
      */
     public function up()
     {
-        Schema::table('task_comment', function (Blueprint $table) {
+        Schema::table('task_comments', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
 
             $table->foreign('task_id')
                 ->references('task_id')
-                ->on('task');
+                ->on('tasks');
 
         });
     }
@@ -35,9 +35,9 @@ class AddForeignKeyInTaskComment extends Migration
         /**
          * @see <table_name>_<column_name>_foreign
          */
-        Schema::table('task_comment', function (Blueprint $table) {
-            $table->dropForeign('task_comment_user_id_foreign');
-            $table->dropForeign('task_comment_task_id_foreign');
+        Schema::table('task_comments', function (Blueprint $table) {
+            $table->dropForeign('task_comments_user_id_foreign');
+            $table->dropForeign('task_comments_task_id_foreign');
         });
     }
 }

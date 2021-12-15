@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskGroupTable extends Migration
+class CreateTaskCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTaskGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_group', function (Blueprint $table) {
-            $table->id('task_group_id');
-            $table->string('name', 255)->index();
-            $table->string('color', 7); // #00FF00
+        Schema::create('task_comments', function (Blueprint $table) {
+            $table->id('task_comment_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->text('comment')->default(null);
+            $table->bigInteger('task_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTaskGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_group');
+        Schema::dropIfExists('task_comments');
     }
 }
