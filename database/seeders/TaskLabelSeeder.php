@@ -14,7 +14,7 @@ class TaskLabelSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('task_label')->insert(
+        DB::table('task_labels')->insert(
             [
                 [
                     'name' => 'bug',

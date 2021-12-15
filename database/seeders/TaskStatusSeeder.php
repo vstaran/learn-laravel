@@ -14,7 +14,7 @@ class TaskStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('task_status')->insert(
+        DB::table('task_statuses')->insert(
             [
                 [
                     'name' => 'to do',

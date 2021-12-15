@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TaskComment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,8 +20,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TaskStatusSeeder::class,
             TaskLabelSeeder::class,
-            TaskGroupSeeder::class
-            //CommentSeeder::class,
+            TaskGroupSeeder::class,
+            TaskSeeder::class,
+            TaskCommentSeeder::class
         ]);
 
     }

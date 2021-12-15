@@ -14,7 +14,7 @@ class TaskGroupSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('task_group')->insert(
+        DB::table('task_groups')->insert(
             [
                 [
                     'name' => 'My',
