@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskGroupsController;
+use App\Http\Controllers\TaskLabelsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TaskStatusesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +29,6 @@ Route::name('users.')->prefix('users')->group(function () {
 });
 
 Route::resource('tasks', TasksController::class);
+Route::resource('task-groups', TaskGroupsController::class);
+Route::resource('task-labels', TaskLabelsController::class);
+Route::resource('task-statuses', TaskStatusesController::class);

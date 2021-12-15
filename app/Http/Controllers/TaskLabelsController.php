@@ -2,105 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\TaskLabel;
 use Illuminate\Http\Request;
 
-class TasksController extends Controller
+class TaskLabelsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * method - GET|HEAD
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
         // Gust for test
-        $tasks = Task::query()->whereNull('parent_task_id')->get();
+        $tasks = TaskLabel::query()->get();
 
         $index = 1;
         foreach ($tasks as $item) {
-            echo "<hr>Task " . $index++;
+            echo "<hr>Label " . $index++;
             dump($item);
             echo "<hr>";
-            dump($item->status);
-            dump($item->labels);
-            dump($item->group);
-            dump($item->comments);
-            dump($item->creatorUser);
-            dump($item->assignedUser);
-            dump($item->subTasks);
+            dump($item->tasks);
             echo "<hr>";
         }
 
 
-        $url = route('tasks.index');
-        return "[GET|HEAD] Tasks Index-List / Current URL = " . $url;
+        $url = route('task-labels.index');
+        return "[GET|HEAD] Task labels Index-List / Current URL = " . $url;
     }
 
     /**
      * Show the form for creating a new resource.
-     * method - GET|HEAD
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $url = route('tasks.create');
-
-        return "[GET|HEAD] Task Create-Form / Current URL = " . $url;
+        //
     }
 
     /**
      * Store a newly created resource in storage.
-     * method - POST
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $url = route('tasks.store');
-
-        return "[POST] Task Store / Current URL = " . $url;
+        //
     }
 
     /**
      * Display the specified resource.
-     * method - GET|HEAD
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $url = route('tasks.show', [
-            'task' => $id
-        ]);
-
-        return "[GET|HEAD] Task Show / Current URL = " . $url;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
-     * method - GET|HEAD
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $url = route('tasks.edit', [
-            'task' => $id
-        ]);
-
-        return "[GET|HEAD] Task Edit / Current URL = " . $url;
+        //
     }
 
     /**
      * Update the specified resource in storage.
-     * method - PUT|PATCH
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -108,26 +83,17 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $url = route('tasks.update', [
-            'task' => $id
-        ]);
-
-        return "[PUT|PATCH] Task Update / Current URL = " . $url;
+        //
     }
 
     /**
      * Remove the specified resource from storage.
-     * method - DELETE
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $url = route('tasks.destroy', [
-            'task' => $id
-        ]);
-
-        return "[DELETE] Task Destroy / Current URL = " . $url;
+        //
     }
 }
