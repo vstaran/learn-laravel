@@ -53,7 +53,8 @@ class HomeController extends Controller
         $record->description = $faker->text(500);
 
         // Save mod fields of task in history
-        History::save($record);
+        //History::save($record);
+        \App\Service\History\Facade\History::save($record);
 
         // Save task
         $record->save();
