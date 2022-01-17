@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/test', [HomeController::class, 'test'])->name('home.test');
 
 Route::name('users.')->prefix('users')->group(function () {
     Route::post('/register', [UsersController::class, 'register'])->name('register');

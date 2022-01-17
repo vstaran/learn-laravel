@@ -1,8 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
+use App\Models\Task;
+use App\Service\History\History;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -31,5 +34,32 @@ class HomeController extends Controller
         // TODO - изучить views.blade
         return "Home Page / Current URL = " . $url . $form;
     }
+
+
+    /**
+     * Test for HistoryServiceProvider
+     *
+     */
+    public function test()
+    {
+        $faker = Faker::create();
+        $count_tasks = DB::table('tasks')->count();
+
+        // Select random task
+        $record = Task::find(rand(1, $count_tasks));
+
+        // Mod Task fields
+        $record->name = $faker->jobTitle();
+        $record->description = $faker->text(500);
+
+        // Save mod fields of task in history
+        History::save($record);
+
+        // Save task
+        $record->save();
+
+        dd($record);
+    }
+
 
 }
