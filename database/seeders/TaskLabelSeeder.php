@@ -19,21 +19,21 @@ class TaskLabelSeeder extends Seeder
                 [
                     'name' => 'bug',
                     'description' => 'This is description bug',
-                    'color' => '#00FF00',
+                    'color' => '#e41813',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
                 [
                     'name' => 'feature',
                     'description' => 'This is description feature',
-                    'color' => '#0000FF',
+                    'color' => '#009a00',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
                 [
                     'name' => 'urgent',
                     'description' => 'This is description urgent',
-                    'color' => '#FFFF00',
+                    'color' => '#157ae8',
                     'created_at' => now(),
                     'updated_at' => now()
                 ]

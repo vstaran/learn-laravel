@@ -20,7 +20,8 @@ class AddForeignKeyInTaskComments extends Migration
 
             $table->foreign('task_id')
                 ->references('task_id')
-                ->on('tasks');
+                ->on('tasks')
+                ->onDelete('cascade');
 
         });
     }

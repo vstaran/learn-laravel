@@ -16,7 +16,9 @@ class AddForeignKeyInTaskLabel extends Migration
         Schema::table('task_label', function (Blueprint $table) {
             $table->foreign('task_id')
                 ->references('task_id')
-                ->on('tasks');
+                ->on('tasks')
+                ->onDelete('cascade');
+
 
             $table->foreign('task_label_id')
                 ->references('task_label_id')
