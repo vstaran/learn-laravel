@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,7 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Service\History\HistoryServiceProvider::class
+        App\Service\History\HistoryServiceProvider::class,
+        App\Providers\BladeServiceProvider::class
 
     ],
 

@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Models\TaskGroup;
+use App\Models\TaskLabel;
+use App\Models\TaskStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
+    protected $tasks;
+
+    public function __construct(Task $tasks)
+    {
+        $this->tasks = $tasks;
+    }
+
     /**
      * Display a listing of the resource.
      * method - GET|HEAD
@@ -15,119 +27,125 @@ class TasksController extends Controller
      */
     public function index()
     {
-
-        // Gust for test
-        $tasks = Task::query()->whereNull('parent_task_id')->get();
-
-        $index = 1;
-        foreach ($tasks as $item) {
-            echo "<hr>Task " . $index++;
-            dump($item);
-            echo "<hr>";
-            dump($item->status);
-            dump($item->labels);
-            dump($item->group);
-            dump($item->comments);
-            dump($item->creatorUser);
-            dump($item->assignedUser);
-            dump($item->subTasks);
-            echo "<hr>";
-        }
-
-
-        $url = route('tasks.index');
-        return "[GET|HEAD] Tasks Index-List / Current URL = " . $url;
+        return view('task.list', ['tasks' => $this->tasks->getTasks()->paginate(5)]);
     }
 
     /**
      * Show the form for creating a new resource.
      * method - GET|HEAD
      *
+     * @param TaskGroup $taskGroups
+     * @param TaskStatus $taskStatuses
+     * @param User $users
+     * @param TaskLabel $taskLabels
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(TaskGroup $taskGroups, TaskStatus $taskStatuses, User $users, TaskLabel $taskLabels)
     {
-        $url = route('tasks.create');
-
-        return "[GET|HEAD] Task Create-Form / Current URL = " . $url;
+        return view('task.form',
+            [
+                'tasks' => $this->tasks->all(), /** TODO - задач может быть много - нудно добавить autocomplete для поля parent_task_id */
+                'taskGroups' => $taskGroups->all(),
+                'taskStatuses' => $taskStatuses->all(),
+                'users' =>  $users->all(),
+                'taskLabels' => $taskLabels->all()
+            ]
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      * method - POST
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  TaskRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        $url = route('tasks.store');
+        $tasks = $this->tasks->create($request->all());
 
-        return "[POST] Task Store / Current URL = " . $url;
+        // add label to task
+        $tasks->labels()->sync($request->input('task_label_id'));
+
+        return back()->with('message', [
+            'type' => 'success',
+            'message' => 'Задача добавлена'
+        ]);
     }
 
     /**
      * Display the specified resource.
      * method - GET|HEAD
      *
-     * @param  int  $id
+     * @param  Task $task
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $url = route('tasks.show', [
-            'task' => $id
-        ]);
-
-        return "[GET|HEAD] Task Show / Current URL = " . $url;
+        return view('task.show', ['task' => $task]);
     }
 
     /**
      * Show the form for editing the specified resource.
      * method - GET|HEAD
      *
-     * @param  int  $id
+     * @param Task $task
+     * @param TaskGroup $taskGroups
+     * @param TaskStatus $taskStatuses
+     * @param User $users
+     * @param TaskLabel $taskLabels
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task, TaskGroup $taskGroups, TaskStatus $taskStatuses, User $users, TaskLabel $taskLabels)
     {
-        $url = route('tasks.edit', [
-            'task' => $id
-        ]);
-
-        return "[GET|HEAD] Task Edit / Current URL = " . $url;
+        return view(
+            'task.form',
+            [
+                'task' => $task,
+                'tasks' => $this->tasks->all(), /** TODO - задач может быть много - нудно добавить autocomplete для поля parent_task_id */
+                'taskGroups' => $taskGroups->all(),
+                'taskStatuses' => $taskStatuses->all(),
+                'users' => $users->all(),
+                'taskLabels' => $taskLabels->all()
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      * method - PUT|PATCH
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  TaskRequest  $request
+     * @param  Task $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, Task $task)
     {
-        $url = route('tasks.update', [
-            'task' => $id
-        ]);
+        $task->update($request->all());
+        $task->labels()->sync($request->input('task_label_id'));
 
-        return "[PUT|PATCH] Task Update / Current URL = " . $url;
+        $task->touch(); // updated_at - now()
+
+        return back()->with('message', [
+            'type' => 'success',
+            'message' => 'Задача обновлена'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      * method - DELETE
      *
-     * @param  int  $id
+     * @param  Task $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        $url = route('tasks.destroy', [
-            'task' => $id
-        ]);
+        $task->delete();
 
-        return "[DELETE] Task Destroy / Current URL = " . $url;
+        return redirect()->back()->with('message', [
+            'type' => 'success',
+            'message' => 'Задача успешно удалена'
+        ]);
     }
 }
