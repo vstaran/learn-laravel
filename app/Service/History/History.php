@@ -14,7 +14,7 @@ class History
 
         if ($attributes) {
             foreach ($attributes as $key => $attribute) {
-                DB::table('history_task')->insert(
+                HistoryTask::insert(
                     [
                         'task_id' => $entity->task_id,
                         'key' => $key,

@@ -40,21 +40,21 @@ class HomeController extends Controller
      * Test for HistoryServiceProvider
      *
      */
-    public function test()
+    public function test(Task $task, Faker $faker)
     {
-        $faker = Faker::create();
-        $count_tasks = DB::table('tasks')->count();
+        $fake = $faker->create();
+        $count_tasks = $task->count();
 
         // Select random task
-        $record = Task::find(rand(1, $count_tasks));
+        $record = $task->find(rand(1, $count_tasks));
 
         // Mod Task fields
-        $record->name = $faker->jobTitle();
-        $record->description = $faker->text(500);
+        $record->name = $fake->jobTitle();
+        $record->description = $fake->text(500);
 
         // Save mod fields of task in history
         //History::save($record);
-        \App\Service\History\Facade\History::save($record);
+        \App\Service\History\Facade\History::save($record); // use Facade
 
         // Save task
         $record->save();
