@@ -3,36 +3,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 /**
  * Class UsersController
  * @package App\Http\Controllers
  */
 class UsersController
 {
-    /**
-     * Регистрация пользователя
-     *
-     * @return string
-     */
-    public function register()
-    {
-        $url = route('users.register');
-
-        return "[POST] User Register Page / Current URL = " . $url;
-    }
-
-    /**
-     * Авторизация пользователя
-     *
-     * @return string
-     */
-    public function login()
-    {
-        $url = route('users.login');
-
-        return "[POST] User Login Page / Current URL = " . $url;
-    }
-
     /**
      * Просмотр пользователя
      *
